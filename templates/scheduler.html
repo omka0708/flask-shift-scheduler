@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link rel="stylesheet"/>
+    <style>
+       div#day {
+           width: auto;
+           display: inline-block;
+           vertical-align: top;
+       }
+    </style>
+</head>
+<body>
+
+<form action="{{ url_for('scheduler') }}" method="post">
+    <label for="start">Start of working day:</label>
+    <input type="time" id="start" name="start" value="08:00"/>
+
+    <br><br>
+
+    <label for="end">End of working day:</label>
+    <input type="time" id="end" name="end" value="22:00"/>
+
+    <br><br>
+
+    <label for="shift">Duration of shift:</label>
+    <input type="time" id="shift" name="shift" value="12:00"/>
+
+    <br><br>
+
+    <label for="start_date">Start date of planning:</label>
+    <input type="date" id="start_date" name="start_date" value="2012-01-01"/>
+
+    <br><br>
+
+    <label for="end_date">End date of planning:</label>
+    <input type="date" id="end_date" name="end_date" value="2012-06-01"/>
+
+    <br><br>
+
+    <label for="hpm">Maximum number of hours per month per employee</label>
+    <input type="number" id="hpm" name="hpm" value="144"/>
+
+    <br><br>
+
+    <input type="submit" value="Send"/>
+</form>
+
+{% if plan %}
+{% for date, value in plan.items() %}
+    <h3>{{ date }}</h3>
+    {% for day, shift in value.items() %}
+        <div id="day">
+        <h4>{{ day }}</h4>
+        <ul>
+            {% for time, workers in shift.items() %}
+                <li>
+                    <strong>{{ time }}</strong>
+                    <ul>
+                        {% for worker in workers %}
+                            <li>
+                                {{ worker.name }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+        </div>
+    {% endfor %}
+{% endfor %}
+{% endif %}
+
+</body>
+</html>
