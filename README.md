@@ -10,3 +10,6 @@ Configurable shift scheduler.
 - Maximum number of hours per month per employee
 
 On Sunday there is 1 less person working than average, on Monday 1 more.
+
+## How it works?
+https://www.youtube.com/watch?v=fOcRRXQ0NLI
